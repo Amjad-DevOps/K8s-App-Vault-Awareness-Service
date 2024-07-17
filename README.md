@@ -3,4 +3,7 @@ Vault awareness service is a Python code service that typically refers to the ab
 
 Vault is a tool for securely accessing secrets, such as API keys, passwords, or certificates.
 
+Let's create a vault service in Python and deploy it in Kubernetes.
+
+Prerequisites: Kubernetes Cluster, Vault Server, GitLab CI/CD, Docker, Gloo Edge
 
