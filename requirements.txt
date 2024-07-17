@@ -1,0 +1,4 @@
+flask
+requests==2.27.1
+hvac==2.2.0
+python-gnupg
