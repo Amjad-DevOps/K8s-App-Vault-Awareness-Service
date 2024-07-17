@@ -54,3 +54,13 @@ curl --location 'https://<address>/vault/read_secret' \
 ```
 
 5. /vault/push_secret : Push the secret to the vault
+```
+curl --location 'https://<address>/vault/push_secret' \
+--header 'Content-Type: application/json' \
+--data '{
+    "path": "<path>",
+    "key": "<key_name>,
+    "value": "<value>"
+}
+'
+```
