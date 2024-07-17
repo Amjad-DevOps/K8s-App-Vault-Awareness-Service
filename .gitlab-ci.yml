@@ -1,0 +1,28 @@
+variables:
+  VARIABLE_DATA: Gitlab-CI-YAML
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ''
+  IMAGE_NAME:
+     value: "vault_service_v1"
+     description: "Name of image"
+stages:
+  - build
+build:
+  image: docker:20.10.16
+  stage: build_image
+  services:
+    - name: docker:20.10.16-dind
+      alias: docker
+  before_script:
+    - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASSWORD" $REGISTRY
+  script:
+    - docker build -t $IMAGE_NAME -f Dockerfile .
+    - export DATE_TAG=`date '+%Y%m%d%H%M%S'`
+    - for t in latest $CI_COMMIT_SHA $DATE_TAG; do docker tag "$IMAGE_NAME:latest" "$REGISTRY/$IMAGE_NAME:${t}"; done
+    - for t in latest $CI_COMMIT_SHA $DATE_TAG; do docker push "$REGISTRY/$IMAGE_NAME:${t}"; done
+  tags:
+    - docker-dind
+  rules:
+    - if: '$CI_PIPELINE_SOURCE=="web"'
+      when: always
+    - when: never
