@@ -5,7 +5,7 @@ import gnupg
 
 pgp_generate_endpoint = Blueprint('pgp_generate_endpoint', __name__)
 
-@pgp_generate_endpoint.route('/vault/pgp/_generate', methods=['POST'])
+@pgp_generate_endpoint.route('/vault/pgp/generate', methods=['POST'])
 def pgp_generate():
     data = request.get_json()
     vaultKeyDTO = data.get('vaultKeyDTO')
